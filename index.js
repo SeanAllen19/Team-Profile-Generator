@@ -16,7 +16,7 @@ const addManager = ()=>{
         {
             type:"input",
             name:"managerId",
-            message:"What is the manager employee ID?",
+            message:"What is the manager employee ID?(Required)",
         },
         {
             type:"input",
@@ -59,6 +59,32 @@ const getPrompt = () => {
                     buildTeam();
             }
     })}
+
+
+const promptEmployee = () => {
+    console.log("this is employee prompt")
+} ;
+
+const promptEngineer = () => {
+    console.log("Engineer prompt")
+} ;
+
+const promptIntern = () => {
+    console.log("Intern prompt")
+} ;
+
+const buildTeam = () => {
+    ("building team prompt")
+} ;
+
+
+
+
+
+
+
+
+
 
     addManager();
 
