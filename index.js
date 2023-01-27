@@ -12,21 +12,46 @@ const addManager = ()=>{
             type:"input",
             name:"name",
             message:"What is the name of the manager of the team?(Required)",
+            validate: name => {
+                if (name) {
+                    return true;
+                } else {
+                    console.log('MANAGER NAME is required')
+                    return false;
+                }
+            }
         },
         {
             type:"input",
             name:"managerId",
             message:"What is the manager employee ID?(Required)",
+            validate: managerId => {
+                if (managerId) {
+                    return true;
+                } else {
+                    console.log('MANAGER ID is required')
+                    return false;
+                }
+            }
         },
         {
             type:"input",
             name:"email",
             message:"what is the manager email address?",
+            validate: email => {
+                if (email) {
+                    return true;
+                } else {
+                    console.log('EMAIL is required')
+                    return false;
+                }
+            }
         },
         {
             type:"input",
             name:"officeNumber",
             message:"What is the office number?",
+            
         },
     ]).then (managerInput=>{
         console.log(managerInput)
@@ -74,7 +99,8 @@ const promptIntern = () => {
 } ;
 
 const buildTeam = () => {
-    ("building team prompt")
+   console.log("building team prompt")
+   console.log(team)
 } ;
 
 
