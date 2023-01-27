@@ -1,21 +1,21 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-const manager = require("./lib/manager");
-const engineer = require("./lib/engineer");
-const intern = require("./lib/intern");
-const employee = require("./lib/employee");
+const Manager = require("./lib/manager");
+const Engineer = require("./lib/engineer");
+const Intern = require("./lib/intern");
+const team = [];
 
 const addManager = ()=>{
     return inquirer.prompt([
         {
             type:"input",
             name:"name",
-            message:"What is the name of the manager of the team?",
+            message:"What is the name of the manager of the team?(Required)",
         },
         {
             type:"input",
-            name:"ID",
+            name:"managerId",
             message:"What is the manager employee ID?",
         },
         {
@@ -28,14 +28,37 @@ const addManager = ()=>{
             name:"officeNumber",
             message:"What is the office number?",
         },
-    ])
-    .then (managerInput=>{
+    ]).then (managerInput=>{
         console.log(managerInput)
-        const {name, ID, email, officeNumber} = managerInput;
-        const manager = new Manager (name, ID, email, officeNumber);
-        team.push();
-        console.log(team)
-        console.log(manager);
-    })
-}
-addManager();
+        const manager = new Manager (managerInput.name, managerInput.managerId, managerInput.email, managerInput.officeNumber);
+        team.push(manager);
+        getPrompt();
+    })}
+
+const getPrompt = () => {
+    return inquirer.prompt([ 
+            {
+                type: 'list',
+                name: 'menu',
+                message: "Please select an option",
+                choices: ['Add Employee', 'Add Engineer', 'Add Intern', 'Complete Team Profile Generator']
+
+        }
+    ]).then(userChoice => {
+            switch(userChoice.menu) {
+                case 'Add Employee': 
+                    promptEmployee();
+                    break;
+                case 'Add Engineer' :
+                    promptEngineer();
+                    break;
+               case 'Add Intern': 
+                    promptIntern();
+                    break;
+                default:
+                    buildTeam();
+            }
+    })}
+
+    addManager();
+
