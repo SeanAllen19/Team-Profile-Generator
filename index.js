@@ -71,32 +71,6 @@ const addManager = ()=>{
         getPrompt();
     })}
 
-const getPrompt = () => {
-    return inquirer.prompt([ 
-            {
-                type: 'list',
-                name: 'menu',
-                message: "Please select an option",
-                choices: ['Add Employee', 'Add Engineer', 'Add Intern', 'Complete Team Profile Generator']
-
-        }
-    ]).then(userChoice => {
-            switch(userChoice.menu) {
-                case 'Add Employee': 
-                    promptEmployee();
-                    break;
-                case 'Add Engineer' :
-                    promptEngineer();
-                    break;
-               case 'Add Intern': 
-                    promptIntern();
-                    break;
-                default:
-                    buildTeam();
-            }
-    })}
-
-
 const promptEmployee = () => {
 
     console.log(`
@@ -285,6 +259,32 @@ const promptIntern = () => {
         console.log(team)
         getPrompt();
     })}
+    
+const getPrompt = () => {
+    return inquirer.prompt([ 
+            {
+                type: 'list',
+                name: 'menu',
+                message: "Please select an option",
+                choices: ['Add Employee', 'Add Engineer', 'Add Intern', 'Complete Team Profile Generator']
+
+        }
+    ]).then(userChoice => {
+            switch(userChoice.menu) {
+                case 'Add Employee': 
+                    promptEmployee();
+                    break;
+                case 'Add Engineer' :
+                    promptEngineer();
+                    break;
+               case 'Add Intern': 
+                    promptIntern();
+                    break;
+                default:
+                    buildTeam();
+            }
+    })}
+
 
 const buildTeam = () => {
    console.log(`
@@ -295,23 +295,29 @@ const buildTeam = () => {
         *************************
 
    You have successfully created your
-            TEAM PROFILE!
+            TEAM PROFILE!   
     --------------------------------
 
     Please open you're new HTML file 
             to your browser.
    `)
    console.log(team)
+
+   // TODO: Create a function to write README file
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName,data, e => {
+        if (e) {
+            return console.log(e)
+        }
+        console.log("COMPLETE! LOOK AT YOUR HTML FILE")
+    }).then((teamData) => {
+        fs.writeToFile("generate.HTML", writeToFile(teamData))
+    })
+}
+
+
 } ;
 
 
-
-
-
-
-
-
-
-
-    addManager();
+addManager();
 
