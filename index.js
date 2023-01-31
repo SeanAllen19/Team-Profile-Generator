@@ -5,7 +5,7 @@ const Manager = require("./lib/manager");
 const Employee = require("./lib/employee");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
-
+const htmlGenerator = require("./dist/generateTheHtml");
 const team = [];
 
 const addManager = ()=>{
@@ -120,15 +120,9 @@ const promptEmployee = () => {
                 }
             }
         },
-        {
-            type:"input",
-            name:"officeNumber",
-            message:"What is the office number?",
-            
-        },
     ]).then (EmployeeInput => {
         console.log(EmployeeInput);
-        const newEmployee = new Employee (EmployeeInput.name, EmployeeInput.EmployeeId, EmployeeInput.email, EmployeeInput.officeNumber);
+        const newEmployee = new Employee (EmployeeInput.name, EmployeeInput.EmployeeId, EmployeeInput.email);
         team.push(newEmployee);
         console.log(team)
         getPrompt();
@@ -301,19 +295,10 @@ const buildTeam = () => {
     Please open you're new HTML file 
             to your browser.
    `)
-   console.log(team)
+   console.log(`This is the results: ` + team)
 
-   // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-    fs.writeFile(fileName,data, e => {
-        if (e) {
-            return console.log(e)
-        }
-        console.log("COMPLETE! LOOK AT YOUR HTML FILE")
-    }).then((teamData) => {
-        fs.writeToFile("generate.HTML", writeToFile(teamData))
-    })
-}
+fs.writeFileSync("./dist/team.html", htmlGenerator(team));
+
 
 
 } ;
